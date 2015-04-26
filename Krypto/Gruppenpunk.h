@@ -1,8 +1,11 @@
 #pragma once
 class Gruppenpunkt
 {
-public:
+private:
 	static unsigned long long prim;
+	static unsigned long long sqrtPrim;
+public:
+	
 	unsigned long long zahl;
 
 
@@ -10,9 +13,14 @@ public:
 	Gruppenpunkt(unsigned long long value);
 	~Gruppenpunkt();
 
-	Gruppenpunkt operator+(const Gruppenpunkt& a);
+	Gruppenpunkt operator+(Gruppenpunkt& a);
+	Gruppenpunkt ModPlus(Gruppenpunkt& a);
+	Gruppenpunkt Negativ();
+	Gruppenpunkt operator*(Gruppenpunkt&a);
+	Gruppenpunkt div2();
 
 	void print();
 	static void setPrim(unsigned long long value);
+	static unsigned long long getPrim();
 };
 

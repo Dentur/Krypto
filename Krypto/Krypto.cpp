@@ -11,6 +11,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	Gruppenpunkt p = Gruppenpunkt(80);
 
 	(g + p).print();
+	printf("Ueberpruefung via modulo: ");
+	g.ModPlus(p).print();
+	printf("Ueberpruefung via modulo: ");
+	g.ModPlus(p).Negativ().print();
 
 	system("pause");
 }
