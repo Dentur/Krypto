@@ -2,25 +2,26 @@
 class Gruppenpunkt
 {
 private:
-	static unsigned long long prim;
-	static unsigned long long sqrtPrim;
+	static unsigned int prim;
+	static unsigned int sqrtPrim;
 public:
 	
-	unsigned long long zahl;
+	unsigned int zahl;
 
 
 	Gruppenpunkt();
-	Gruppenpunkt(unsigned long long value);
+	Gruppenpunkt(unsigned int value);
 	~Gruppenpunkt();
 
 	Gruppenpunkt operator+(Gruppenpunkt& a);
 	Gruppenpunkt ModPlus(Gruppenpunkt& a);
 	Gruppenpunkt Negativ();
 	Gruppenpunkt operator*(Gruppenpunkt&a);
+	Gruppenpunkt ModMal(Gruppenpunkt &a);
 	Gruppenpunkt div2();
 
 	void print();
-	static void setPrim(unsigned long long value);
-	static unsigned long long getPrim();
+	static void setPrim(unsigned int value);
+	static unsigned int getPrim();
 };
 

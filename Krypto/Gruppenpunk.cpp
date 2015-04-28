@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "Gruppenpunk.h"
 
-unsigned long long Gruppenpunkt::prim;
-unsigned long long Gruppenpunkt::sqrtPrim;
+unsigned int Gruppenpunkt::prim;
+unsigned int Gruppenpunkt::sqrtPrim;
 Gruppenpunkt::Gruppenpunkt()
 {
 }
 
-Gruppenpunkt::Gruppenpunkt(unsigned long long value)
+Gruppenpunkt::Gruppenpunkt(unsigned int value)
 {
 	zahl = value;
 }
@@ -40,10 +40,24 @@ Gruppenpunkt Gruppenpunkt::Negativ()
 
 Gruppenpunkt Gruppenpunkt::operator*(Gruppenpunkt &a)
 {
-	if ((zahl >= ((prim + 1) >> 1)) && (a.zahl >= ((prim + 1) >> 1))) return ((*this).Negativ()*a.Negativ());
-	if (zahl >= ((prim + 1) >> 1)) return (*this).Negativ()*a;
-	if (a.zahl >= ((prim + 1) >> 1)) return (*this)*a.Negativ();
-	//if (zahl >= sqrtPrim) return 
+	if ((zahl >= ((prim + 1)/2)) && (a.zahl >= ((prim + 1)/2))) 
+		return ((*this).Negativ()*a.Negativ());
+	if (zahl >= ((prim + 1)/2)) 
+		return (*this).Negativ()*a;
+	if (a.zahl >= ((prim + 1)/2)) 
+		return (*this)*a.Negativ();
+	if (zahl > sqrtPrim)
+	{
+		unsigned int test = sqrtPrim * a.zahl;
+		Gruppenpunkt c = Gruppenpunkt(test);
+		Gruppenpunkt d = Gruppenpunkt((zahl - sqrtPrim)*a.zahl);
+		return c+d;
+	}
+}
+
+Gruppenpunkt Gruppenpunkt::ModMal(Gruppenpunkt &a)
+{
+	return Gruppenpunkt((zahl*a.zahl) % prim);
 }
 
 Gruppenpunkt Gruppenpunkt::div2()
@@ -54,17 +68,17 @@ Gruppenpunkt Gruppenpunkt::div2()
 
 void Gruppenpunkt::print()
 {
-	printf("Gruppenzahl: %lld", zahl);
+	printf("Gruppenzahl: %u", zahl);
 	printf("\n");
 }
 
-void Gruppenpunkt::setPrim(unsigned long long value)
+void Gruppenpunkt::setPrim(unsigned int value)
 {
 	prim = value;
-	sqrtPrim = 1;
+	sqrtPrim = 5;
 }
 
-unsigned long long Gruppenpunkt::getPrim()
+unsigned int Gruppenpunkt::getPrim()
 {
 	return prim;
 }
