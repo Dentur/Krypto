@@ -19,6 +19,8 @@ public:
 	Gruppenpunkt operator*(Gruppenpunkt&a);
 	Gruppenpunkt ModMal(Gruppenpunkt &a);
 	Gruppenpunkt div2();
+	Gruppenpunkt operator^(unsigned int a);
+	bool isSquare();
 
 	void print();
 	static void setPrim(unsigned int value);

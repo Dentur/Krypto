@@ -68,6 +68,21 @@ Gruppenpunkt Gruppenpunkt::operator*(Gruppenpunkt &a)
 	return r;
 }
 
+Gruppenpunkt Gruppenpunkt::operator^(unsigned int a)
+{
+	int n = a;
+	Gruppenpunkt r = Gruppenpunkt(1);
+	Gruppenpunkt x = Gruppenpunkt(zahl);
+	for (; a; a = a >> 1, x = x*x)
+	{
+		if (a & 1)
+		{
+			r = r*x;
+		}
+	}
+	return r;
+}
+
 Gruppenpunkt Gruppenpunkt::ModMal(Gruppenpunkt &a)
 {
 	return Gruppenpunkt((zahl*a.zahl) % prim);
@@ -88,10 +103,24 @@ void Gruppenpunkt::print()
 void Gruppenpunkt::setPrim(unsigned int value)
 {
 	prim = value;
-	sqrtPrim = 5;
+	sqrtPrim = 11;
 }
 
 unsigned int Gruppenpunkt::getPrim()
 {
 	return prim;
+}
+
+bool Gruppenpunkt::isSquare()
+{
+	Gruppenpunkt t = (*this);
+	Gruppenpunkt s = t ^ ((prim - 1) / 2);
+	if (s.zahl==1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
