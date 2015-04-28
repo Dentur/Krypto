@@ -23,8 +23,8 @@ Gruppenpunkt Gruppenpunkt::operator+(Gruppenpunkt &a)
 		return Gruppenpunkt(zahl + a.zahl);
 	else
 	{
-		if (zahl <= a.zahl) return((zahl - (a.zahl^prim)) ^ prim);
-		else return ((a.zahl - (zahl^prim)) ^ prim);
+		if (zahl <= a.zahl) return((zahl - (a.zahl^prim)));
+		else return ((a.zahl - (zahl^prim)));
 	}
 }
 
@@ -40,7 +40,7 @@ Gruppenpunkt Gruppenpunkt::Negativ()
 
 Gruppenpunkt Gruppenpunkt::operator*(Gruppenpunkt &a)
 {
-	if ((zahl >= ((prim + 1)/2)) && (a.zahl >= ((prim + 1)/2))) 
+	/*if ((zahl >= ((prim + 1)/2)) && (a.zahl >= ((prim + 1)/2))) 
 		return ((*this).Negativ()*a.Negativ());
 	if (zahl >= ((prim + 1)/2)) 
 		return (*this).Negativ()*a;
@@ -53,6 +53,19 @@ Gruppenpunkt Gruppenpunkt::operator*(Gruppenpunkt &a)
 		Gruppenpunkt d = Gruppenpunkt((zahl - sqrtPrim)*a.zahl);
 		return c+d;
 	}
+	if (a.zahl < sqrtPrim)
+	{
+
+	}*/
+	Gruppenpunkt x = Gruppenpunkt(zahl);
+	Gruppenpunkt r = Gruppenpunkt(0);
+	for (unsigned int bTemp = a.zahl; bTemp; bTemp = bTemp >> 1)
+	{
+		if (bTemp & 1)
+			r = r + x;
+		x = x + x;
+	}
+	return r;
 }
 
 Gruppenpunkt Gruppenpunkt::ModMal(Gruppenpunkt &a)

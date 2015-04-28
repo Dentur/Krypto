@@ -3,22 +3,49 @@
 
 #include "stdafx.h"
 
+#define test;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Gruppenpunkt::setPrim(29);
-	Gruppenpunkt g = Gruppenpunkt(6);
-	Gruppenpunkt p = Gruppenpunkt(3);
-	(g.ModMal(p)).print();
-	(g*p).print();
-	//g.Negativ().print();
+	Gruppenpunkt::setPrim(8191);
+#ifdef test
+	//Test des +
+	printf("+ Test\n");
+	for (int i = 0; i < Gruppenpunkt::getPrim(); i++)
+	{
+		Gruppenpunkt g = Gruppenpunkt(i);
+		for (int j = 0; j < Gruppenpunkt::getPrim(); j++)
+		{
+			Gruppenpunkt p = Gruppenpunkt(j);
+			Gruppenpunkt ergebnis = p + g;
+			Gruppenpunkt modErgebnis = p.ModPlus(g);
+			if (ergebnis.zahl != modErgebnis.zahl)
+			{
+				if (ergebnis.zahl != modErgebnis.Negativ().zahl)
+				{
 
-	/*(g + p).print();
-	printf("Ueberpruefung via modulo: ");
-	g.ModPlus(p).print();
-	printf("Ueberpruefung via modulo: ");
-	g.ModPlus(p).Negativ().print();*/
-
+					printf("fehler at i=%d j=%d\n", i, j);
+				}
+			}
+		}
+	}
+	//Test des *
+	printf("* Test\n");
+	for (int i = 0; i < Gruppenpunkt::getPrim(); i++)
+	{
+		Gruppenpunkt g = Gruppenpunkt(i);
+		for (int j = 0; j < Gruppenpunkt::getPrim(); j++)
+		{
+			Gruppenpunkt p = Gruppenpunkt(j);
+			Gruppenpunkt ergebnis = p * g;
+			Gruppenpunkt modErgebnis = p.ModMal(g);
+			if ((ergebnis.zahl != modErgebnis.zahl) && (ergebnis.zahl != modErgebnis.Negativ().zahl))
+			{
+				printf("fehler at i=%d j=%d\n", i, j);
+			}
+		}
+	}
+#endif
 	system("pause");
 }
 
