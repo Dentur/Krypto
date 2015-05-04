@@ -21,6 +21,7 @@ public:
 	Gruppenpunkt div2();
 	Gruppenpunkt operator^(unsigned int a);
 	bool isSquare();
+	Gruppenpunkt root();
 
 	void print();
 	static void setPrim(unsigned int value);

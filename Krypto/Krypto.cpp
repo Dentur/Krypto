@@ -4,14 +4,19 @@
 #include "stdafx.h"
 
 #define test
-#define testplus
-#define testmal
+//#define testplus
+//#define testmal
 //#define testexp
 //#define testsquare
 
 Gruppenpunkt calcB(Gruppenpunkt a, Gruppenpunkt x1)
 {
 	return ((x1 ^ 3) + (a*x1)).Negativ();
+}
+
+Gruppenpunkt kurve(Gruppenpunkt x, Gruppenpunkt a, Gruppenpunkt b)
+{
+	return (x ^ 3) + x*a + b;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -62,9 +67,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Gruppenpunkt r = Gruppenpunkt(i) ^ (Gruppenpunkt::getPrim() - 1);
 		if (r.zahl != 1)
 		{
-			if (r.Negativ().zahl != 1)
-				printf("fehler at i=%u\n", i);
-
+			printf("fehler at i=%u\n", i);
 		}
 	}
 #endif
@@ -87,7 +90,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	a = Gruppenpunkt(3);
 	x1 = Gruppenpunkt(2);
 	b = calcB(a, x1);
-	b.print();
+
+	for (int i = 0; i < Gruppenpunkt::getPrim(); i++)
+	{
+		Gruppenpunkt y = kurve(i, a, b);
+		if (y.isSquare())
+		{
+			Gruppenpunkt r = y.root();
+			if (Gruppenpunkt(i).isSquare())
+			{
+				if (r.zahl != 0)
+				{
+					printf("x:%d y:%d\n", i, r.zahl);
+				}
+			}
+		}
+	}
 
 	system("pause");
 }

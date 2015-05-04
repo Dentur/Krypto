@@ -124,3 +124,8 @@ bool Gruppenpunkt::isSquare()
 		return false;
 	}
 }
+
+Gruppenpunkt Gruppenpunkt::root()
+{
+	return *this ^ ((prim + 1) >> 1);
+}
