@@ -3,11 +3,11 @@
 
 #include "stdafx.h"
 
-#define test
-//#define testplus
-//#define testmal
-//#define testexp
-//#define testsquare
+//#define test
+#define testplus
+#define testmal
+#define testexp
+#define testsquare
 
 Gruppenpunkt calcB(Gruppenpunkt a, Gruppenpunkt x1)
 {
@@ -90,6 +90,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	a = Gruppenpunkt(3);
 	x1 = Gruppenpunkt(2);
 	b = calcB(a, x1);
+	int anzahl = 0;
 
 	for (int i = 0; i < Gruppenpunkt::getPrim(); i++)
 	{
@@ -97,15 +98,20 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (y.isSquare())
 		{
 			Gruppenpunkt r = y.root();
-			if (Gruppenpunkt(i).isSquare())
+			//printf("%d %d\n", y.zahl, r.zahl);
+			if (r.zahl == 0)
 			{
-				if (r.zahl != 0)
-				{
-					printf("x:%d y:%d\n", i, r.zahl);
-				}
+				printf("X:%d Y:%d\n", i, r.zahl);
+				anzahl++;
+			}
+			else
+			{
+				printf("X:%d Y:%d -Y:%d\n", i, r.zahl,r.Negativ().zahl);
+				anzahl += 2;
 			}
 		}
 	}
+	printf("anzahl:%d\n", anzahl);
 
 	system("pause");
 }

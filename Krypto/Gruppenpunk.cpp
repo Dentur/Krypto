@@ -115,6 +115,8 @@ bool Gruppenpunkt::isSquare()
 {
 	Gruppenpunkt t = (*this);
 	Gruppenpunkt s = t ^ ((prim - 1) / 2);
+	if (zahl == 0)
+		return true;
 	if (s.zahl==1)
 	{
 		return true;
@@ -127,5 +129,5 @@ bool Gruppenpunkt::isSquare()
 
 Gruppenpunkt Gruppenpunkt::root()
 {
-	return *this ^ ((prim + 1) >> 1);
+	return *this ^ ((prim + 1) >> 2);
 }
