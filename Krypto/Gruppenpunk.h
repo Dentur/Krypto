@@ -20,6 +20,10 @@ public:
 	Gruppenpunkt ModMal(Gruppenpunkt &a);
 	Gruppenpunkt div2();
 	Gruppenpunkt operator^(unsigned int a);
+	Gruppenpunkt operator/(Gruppenpunkt &a);
+	Gruppenpunkt operator-(Gruppenpunkt &a);
+	Gruppenpunkt moddiv(Gruppenpunkt &a);
+	bool operator==(Gruppenpunkt &a);
 	bool isSquare();
 	Gruppenpunkt root();
 

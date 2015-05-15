@@ -131,3 +131,29 @@ Gruppenpunkt Gruppenpunkt::root()
 {
 	return *this ^ ((prim + 1) >> 2);
 }
+
+Gruppenpunkt Gruppenpunkt::operator/(Gruppenpunkt &a)
+{
+	if (a.zahl == 0)
+	{
+		return NULL;
+	}
+	Gruppenpunkt d = a^(prim-2);
+	return *this*d;
+}
+Gruppenpunkt Gruppenpunkt::moddiv(Gruppenpunkt &a)
+{
+	if (a.zahl == 0)
+		return NULL;
+	return Gruppenpunkt((this->zahl / a.zahl) % prim);
+}
+
+bool Gruppenpunkt::operator==(Gruppenpunkt &a)
+{
+	return this->zahl == a.zahl;
+}
+
+Gruppenpunkt Gruppenpunkt::operator-(Gruppenpunkt &a)
+{
+	return (*this) + a.Negativ();
+}
