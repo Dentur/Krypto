@@ -133,11 +133,11 @@ int _tmain(int argc, _TCHAR* argv[])
 #endif
 #endif
 	Gruppenpunkt a, b, x1;
-	a = Gruppenpunkt(4);
-	x1 = Gruppenpunkt(4);
+	a = Gruppenpunkt(3);
+	x1 = Gruppenpunkt(2);
 	b = calcB(a, x1);
-	a = 4;
-	b = 20;
+	//a = 4;
+	//b = 20;
 	if (((4 * a.zahl*a.zahl*a.zahl + 27 * b.zahl*b.zahl) % Gruppenpunkt::getPrim())==0)
 	{
 		printf("a und b sind doof!");
@@ -208,7 +208,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//	printf("\n\n");
 	//}
 	Kurvenpunkt::ka = a;
-	for (int i = 2; i < anzahl; i++)
+	for (int i = 0; i < anzahl; i++)
 	{
 		Kurvenpunkt a, tmp;
 		a = Kurvenpunkt(tabelleX[i], tabelleY[i]);
@@ -222,7 +222,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			tAnz++;
 			tmp = a + tmp;
-			tmp.print();
+			//tmp.print();
 		}
 		printf("(%d,%d) %d\n", tabelleX[i].zahl, tabelleY[i].zahl, tAnz);
 	}
