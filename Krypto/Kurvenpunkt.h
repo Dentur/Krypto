@@ -14,6 +14,10 @@ public:
 	~Kurvenpunkt();
 
 	Kurvenpunkt operator+(Kurvenpunkt &Kurvenpunkt);
+	Kurvenpunkt operator^(unsigned int y);
+	bool operator==(Kurvenpunkt &a);
 	void print();
 };
+
+
 

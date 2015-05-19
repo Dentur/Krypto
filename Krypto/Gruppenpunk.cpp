@@ -103,7 +103,8 @@ void Gruppenpunkt::print()
 void Gruppenpunkt::setPrim(unsigned int value)
 {
 	prim = value;
-	sqrtPrim = 11;
+	sqrtPrim = 11;//127
+	//sqrtPrim = 2;
 }
 
 unsigned int Gruppenpunkt::getPrim()
@@ -114,7 +115,7 @@ unsigned int Gruppenpunkt::getPrim()
 bool Gruppenpunkt::isSquare()
 {
 	Gruppenpunkt t = (*this);
-	Gruppenpunkt s = t ^ ((prim - 1) / 2);
+	Gruppenpunkt s = t ^ ((prim - 1) >> 1);
 	if (zahl == 0)
 		return true;
 	if (s.zahl==1)

@@ -4,42 +4,15 @@
 #include "stdafx.h"
 
 //#define test
-//#define testplus
-//#define testmal
-//#define testdiv
-//#define testexp
-//#define testsquare
+#define testplus
+#define testmal
+#define testdiv
+#define testexp
+#define testsquare
 
 Gruppenpunkt calcB(Gruppenpunkt a, Gruppenpunkt x1)
 {
 	return ((x1 ^ 3) + (a*x1)).Negativ();
-}
-
-void kpKp(Gruppenpunkt ax, Gruppenpunkt ay, Gruppenpunkt bx, Gruppenpunkt by, Gruppenpunkt *x, Gruppenpunkt *y, Gruppenpunkt a)
-{
-	if ((ax.zahl == bx.zahl) && (ay.zahl == by.Negativ().zahl))
-	{
-		x->zahl = Gruppenpunkt::getPrim();
-		y->zahl = x->zahl;
-		return;
-	}
-	if ((ax.zahl != bx.zahl) && (ay.zahl != by.zahl))
-	{
-		Gruppenpunkt m = (ay + by.Negativ()) / (ax + bx.Negativ());
-		Gruppenpunkt m2 = m * m;
-		//*x = m2 + (ax+bx.Negativ()).Negativ()
-		*x = m2 + ax.Negativ() + bx.Negativ();
-		*y = (m * (ax + x->Negativ())) + ay.Negativ();
-		return;
-	}
-	else
-	{
-		Gruppenpunkt m = (Gruppenpunkt(3)*(ax ^ 2) + a) / (Gruppenpunkt(2)*ay);
-		Gruppenpunkt m2 = m*m;
-		*x = m2 + (ax + bx).Negativ();
-		*y = m*(ax + x->Negativ()) + ay.Negativ();
-		//Gruppenpunkt m = ((Gruppenpunkt(3)*(ax^2))+)
-	}
 }
 
 Gruppenpunkt kurve(Gruppenpunkt x, Gruppenpunkt a, Gruppenpunkt b)
@@ -50,6 +23,7 @@ Gruppenpunkt kurve(Gruppenpunkt x, Gruppenpunkt a, Gruppenpunkt b)
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Gruppenpunkt::setPrim(/*8191*/127);
+	//Gruppenpunkt::setPrim(7);
 #ifdef test
 #ifdef testplus
 	//Test des +
@@ -136,16 +110,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	a = Gruppenpunkt(3);
 	x1 = Gruppenpunkt(2);
 	b = calcB(a, x1);
-	//a = 4;
-	//b = 20;
+	a = Gruppenpunkt(4);
+	b = Gruppenpunkt(20%Gruppenpunkt::getPrim());
 	if (((4 * a.zahl*a.zahl*a.zahl + 27 * b.zahl*b.zahl) % Gruppenpunkt::getPrim())==0)
 	{
 		printf("a und b sind doof!");
 		system("pause");
 		return 0;
 	}
-	//a = Gruppenpunkt(4);
-	//b = Gruppenpunkt(20);
+	
 	int anzahl = 0;
 
 	for (int i = 0; i < Gruppenpunkt::getPrim(); i++)
@@ -167,8 +140,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 		}
 	}
-	Gruppenpunkt *tabelleX = (Gruppenpunkt*)malloc(sizeof(Gruppenpunkt)*anzahl);
-	Gruppenpunkt *tabelleY = (Gruppenpunkt*)malloc(sizeof(Gruppenpunkt)*anzahl);
+	Kurvenpunkt *tabelle = new Kurvenpunkt[anzahl];
 	int index = 0;
 	for (int i = 0; i < Gruppenpunkt::getPrim(); i++)
 	{
@@ -177,20 +149,17 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			Gruppenpunkt r = y.root();
 			//printf("%d %d\n", y.zahl, r.zahl);
-			if (r.zahl == 0)
+			if (r.zahl != 0)
 			{
-				tabelleX[index] = Gruppenpunkt(i);
-				tabelleY[index] = r;
-				index++;
-				tabelleX[index] = Gruppenpunkt(i);
-				tabelleY[index] = r.Negativ();
-				index++;
+				tabelle[index] = Kurvenpunkt(Gruppenpunkt(i),r);
+				index = index + 1;
+				tabelle[index] = Kurvenpunkt(Gruppenpunkt(i), r.Negativ());
+				index = index +1;
 			}
 			else
 			{
-				tabelleX[index] = Gruppenpunkt(i);
-				tabelleY[index] = r;
-				index++;
+				tabelle[index] = Kurvenpunkt(Gruppenpunkt(i), r);
+				index = index +1;
 			}
 		}
 	}
@@ -211,20 +180,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int i = 0; i < anzahl; i++)
 	{
 		Kurvenpunkt a, tmp;
-		a = Kurvenpunkt(tabelleX[i], tabelleY[i]);
+		a = tabelle[i];
 		tmp = a;
 		int tAnz = 0;
-		while (!tmp.none)
+		//printf("Berechne Punkt: ");
+		//a.print();
+		do
 		{
-			if (tmp.y == Gruppenpunkt(0))
+			if (tmp.y == Gruppenpunkt(Gruppenpunkt::getPrim()))
 			{
 				break;
 			}
 			tAnz++;
 			tmp = a + tmp;
 			//tmp.print();
-		}
-		printf("(%d,%d) %d\n", tabelleX[i].zahl, tabelleY[i].zahl, tAnz);
+		} while (!(tmp == a));
+		printf("(%d,%d) %d\n", tabelle[i].x.zahl, tabelle[i].y.zahl, tAnz);
 	}
 
 	system("pause");
