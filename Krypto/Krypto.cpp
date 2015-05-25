@@ -10,6 +10,16 @@
 #define testexp
 #define testsquare
 
+int kgv(int a, int b)
+{
+	int tmp = a;
+	for (int index = 1; (tmp % b); index++)
+	{
+		tmp = a * index;
+	}
+	return tmp;
+}
+
 Gruppenpunkt calcB(Gruppenpunkt a, Gruppenpunkt x1)
 {
 	return ((x1 ^ 3) + (a*x1)).Negativ();
@@ -177,6 +187,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//	printf("\n\n");
 	//}
 	Kurvenpunkt::ka = a;
+	int alterKGV = 1;
 	for (int i = 0; i < anzahl; i++)
 	{
 		Kurvenpunkt a, tmp;
@@ -196,8 +207,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			//tmp.print();
 		} while (!(tmp == a));
 		printf("(%d,%d) %d\n", tabelle[i].x.zahl, tabelle[i].y.zahl, tAnz);
+		alterKGV = kgv(alterKGV, tAnz);
 	}
-
+	printf("#: %d\n", alterKGV);
 	system("pause");
 }
 
