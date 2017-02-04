@@ -10,6 +10,12 @@
 #define testexp
 #define testsquare
 
+<<<<<<< HEAD
+int babyStepGiantStep(Gruppenpunkt a, Gruppenpunkt b)
+{
+	int u = Gruppenpunkt::getPrim() + 1 - 2 * 
+	return 0;
+=======
 int kgv(int a, int b)
 {
 	int tmp = a;
@@ -18,6 +24,7 @@ int kgv(int a, int b)
 		tmp = a * index;
 	}
 	return tmp;
+>>>>>>> 2ddfb79d11766364071be2d17544cf756538c44c
 }
 
 Gruppenpunkt calcB(Gruppenpunkt a, Gruppenpunkt x1)
@@ -28,16 +35,6 @@ Gruppenpunkt calcB(Gruppenpunkt a, Gruppenpunkt x1)
 Gruppenpunkt kurve(Gruppenpunkt x, Gruppenpunkt a, Gruppenpunkt b)
 {
 	return (x ^ 3) + x*a + b;
-}
-
-
-
-void verschlüsseln(char* txt, Gruppenpunkt a, Gruppenpunkt b)
-{
-	Kurvenpunkt g = Kurvenpunkt(1, 5);
-
-	Gruppenpunkt y = rand() % Gruppenpunkt::getPrim();
-
 }
 
 int _tmain(int argc, _TCHAR* argv[])
